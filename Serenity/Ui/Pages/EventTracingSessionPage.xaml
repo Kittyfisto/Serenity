@@ -1,0 +1,21 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:pages="clr-namespace:Serenity.Ui.Pages">
+    <DataTemplate DataType="{x:Type pages:EventTracingSessionViewModel}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Button x:Name="PART_ToggleRecording" Command="{Binding ToggleRecordCommand}" />
+        </Grid>
+        <DataTemplate.Triggers>
+            <DataTrigger Binding="{Binding IsRecording}" Value="True">
+                <Setter TargetName="PART_ToggleRecording" Property="Content" Value="Stop Recording" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding IsRecording}" Value="False">
+                <Setter TargetName="PART_ToggleRecording" Property="Content" Value="Start Recording" />
+            </DataTrigger>
+        </DataTemplate.Triggers>
+    </DataTemplate>
+</ResourceDictionary>

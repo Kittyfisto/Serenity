@@ -1,0 +1,12 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:ui="clr-namespace:Serenity.Ui"
+                    xmlns:controls="clr-namespace:Metrolib.Controls;assembly=Metrolib">
+    
+    <DataTemplate DataType="{x:Type ui:DashboardViewModel}">
+        <Grid>
+            <controls:FlatButton Content="Create new project"
+                                 Command="{Binding CreateProjectCommand}"/>
+        </Grid>
+    </DataTemplate>
+    
+</ResourceDictionary>

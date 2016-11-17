@@ -1,0 +1,32 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:projectExplorer="clr-namespace:Serenity.Ui.ProjectExplorer">
+
+    <PathGeometry x:Key="Briefcase">
+        M14,6H10V4H14M20,6H16V4L14,2H10L8,4V6H4C2.89,6 2,6.89 2,8V19A2,2 0 0,0 4,21H20A2,2 0 0,0 22,19V8C22,6.89 21.1,6 20,6Z
+    </PathGeometry>
+
+    <HierarchicalDataTemplate DataType="{x:Type projectExplorer:ProjectViewModel}"
+                              ItemsSource="{Binding Items}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <Viewbox Width="24" Height="24"
+                     Margin="0,0,6,0">
+                <Canvas Width="24" Height="24">
+                    <Path
+                        Data="{StaticResource Briefcase}"
+                        Fill="Black" />
+                </Canvas>
+            </Viewbox>
+
+            <TextBlock Grid.Column="1"
+                       VerticalAlignment="Center"
+                       Text="{Binding Name}" />
+        </Grid>
+    </HierarchicalDataTemplate>
+
+</ResourceDictionary>

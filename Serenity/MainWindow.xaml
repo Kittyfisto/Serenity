@@ -1,0 +1,24 @@
+﻿<controls:ChromelessWindow x:Class="Serenity.MainWindow"
+                           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                           xmlns:controls="clr-namespace:Metrolib.Controls;assembly=Metrolib"
+                           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                           xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                           mc:Ignorable="d"
+                           xmlns:serenity="clr-namespace:Serenity"
+                           Title="Serenity"
+                           Height="350" Width="525"
+                           d:DataContext="{d:DesignInstance serenity:MainWindowViewModel}">
+
+    <controls:ChromelessWindow.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Ui/DashboardTemplate.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Ui/ProjectDashboardTemplate.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </controls:ChromelessWindow.Resources>
+    
+    <ContentControl Content="{Binding Content}" />
+
+</controls:ChromelessWindow>

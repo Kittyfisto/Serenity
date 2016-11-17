@@ -1,0 +1,12 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:projectExplorer="clr-namespace:Serenity.Ui.ProjectExplorer">
+    
+    <HierarchicalDataTemplate DataType="{x:Type projectExplorer:FolderViewModel}"
+                              ItemsSource="{Binding Items}">
+        <Grid>
+            <TextBlock Text="{Binding Name}" />
+        </Grid>
+    </HierarchicalDataTemplate>
+    
+</ResourceDictionary>

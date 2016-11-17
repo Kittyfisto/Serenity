@@ -1,0 +1,27 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:ui="clr-namespace:Serenity.Ui"
+                    xmlns:projectExplorer="clr-namespace:Serenity.Ui.ProjectExplorer"
+                    xmlns:pages="clr-namespace:Serenity.Ui.Pages">
+
+    <DataTemplate DataType="{x:Type ui:ProjectDashboardViewModel}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <projectExplorer:ProjectExplorerControl Project="{Binding CurrentProject}"
+                                                SelectedItem="{Binding SelectedItem}" />
+
+            <Grid Grid.Column="1"
+              Width="1"
+              Background="{StaticResource SeparatorBrush}" />
+
+            <pages:PageControl Grid.Column="2"
+                           Page="{Binding SelectedItem}" />
+
+        </Grid>
+    </DataTemplate>
+
+</ResourceDictionary>

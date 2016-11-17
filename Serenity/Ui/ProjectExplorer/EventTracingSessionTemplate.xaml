@@ -1,0 +1,26 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:projectExplorer="clr-namespace:Serenity.Ui.ProjectExplorer">
+
+    <PathGeometry x:Key="ChartTimeline">M2,2H4V20H22V22H2V2M7,10H17V13H7V10M11,15H21V18H11V15M6,4H22V8H20V6H8V8H6V4Z</PathGeometry>
+    
+    <HierarchicalDataTemplate DataType="{x:Type projectExplorer:EventTracingSessionViewModel}"
+                              ItemsSource="{Binding Traces}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Viewbox Width="24" Height="24"
+                     Margin="0,0,6,0">
+                <Canvas Width="24" Height="24">
+                    <Path Data="{StaticResource ChartTimeline}" Fill="Black" />
+                </Canvas>
+            </Viewbox>
+            <TextBlock Grid.Column="1"
+                       VerticalAlignment="Center"
+                       Text="{Binding Name}" />
+        </Grid>
+    </HierarchicalDataTemplate>
+    
+</ResourceDictionary>
