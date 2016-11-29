@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using Serenity.BusinessLogic;
 using Serenity.BusinessLogic.Handles;
 
 namespace Serenity.Ui.Pages
@@ -15,8 +14,8 @@ namespace Serenity.Ui.Pages
 		: Control
 	{
 		public static readonly DependencyProperty PageProperty =
-			DependencyProperty.Register("Page", typeof (IProjectItemHandle), typeof (PageControl),
-			                            new PropertyMetadata(default(IProjectItemHandle), OnPageChanged));
+			DependencyProperty.Register("Page", typeof (IPageViewModel), typeof (PageControl),
+			                            new PropertyMetadata(default(IPageViewModel), OnPageChanged));
 
 		private ContentControl _control;
 
@@ -25,26 +24,26 @@ namespace Serenity.Ui.Pages
 			DefaultStyleKeyProperty.OverrideMetadata(typeof (PageControl), new FrameworkPropertyMetadata(typeof (PageControl)));
 		}
 
-		public IProjectItemHandle Page
+		public IPageViewModel Page
 		{
-			get { return (IProjectItemHandle) GetValue(PageProperty); }
+			get { return (IPageViewModel) GetValue(PageProperty); }
 			set { SetValue(PageProperty, value); }
 		}
 
 		private static void OnPageChanged(DependencyObject d, DependencyPropertyChangedEventArgs args)
 		{
-			((PageControl) d).OnPageChanged((IProjectItemHandle) args.NewValue);
+			((PageControl)d).OnPageChanged((IPageViewModel)args.NewValue);
 		}
 
-		private void OnPageChanged(IProjectItemHandle newValue)
+		private void OnPageChanged(IPageViewModel newValue)
 		{
 			SetContent(newValue);
 		}
 
-		private void SetContent(IProjectItemHandle item)
+		private void SetContent(IPageViewModel item)
 		{
 			if (_control != null)
-				_control.Content = PageFactory.Create(item);
+				_control.Content = item;
 		}
 
 		public override void OnApplyTemplate()

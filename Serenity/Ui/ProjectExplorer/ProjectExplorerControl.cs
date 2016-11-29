@@ -1,7 +1,5 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using Serenity.BusinessLogic;
-using Serenity.BusinessLogic.Handles;
 
 namespace Serenity.Ui.ProjectExplorer
 {
@@ -9,25 +7,28 @@ namespace Serenity.Ui.ProjectExplorer
 		: Control
 	{
 		public static readonly DependencyProperty ProjectProperty =
-			DependencyProperty.Register("Project", typeof (ProjectHandle), typeof (ProjectExplorerControl),
-										new PropertyMetadata(default(ProjectHandle), OnProjectChanged));
+			DependencyProperty.Register("Project", typeof (ProjectViewModel), typeof (ProjectExplorerControl),
+										new PropertyMetadata(default(ProjectViewModel), OnProjectChanged));
 
 		public static readonly DependencyProperty SelectedItemProperty =
-			DependencyProperty.Register("SelectedItem", typeof(IProjectItemHandle), typeof(ProjectExplorerControl),
+			DependencyProperty.Register("SelectedItem", typeof(IProjectItemViewModel), typeof(ProjectExplorerControl),
 			                            new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnSelectedItemChanged));
 
 		private static void OnSelectedItemChanged(DependencyObject d, DependencyPropertyChangedEventArgs args)
 		{
-			((ProjectExplorerControl) d).OnSelectedItemChanged((IProjectItemHandle)args.NewValue);
+			((ProjectExplorerControl)d).OnSelectedItemChanged((IProjectItemViewModel)args.NewValue);
 		}
 
-		private void OnSelectedItemChanged(IProjectItemHandle newValue)
+		private void OnSelectedItemChanged(IProjectItemViewModel newValue)
 		{
 			Select(newValue);
 		}
 
-		private void Select(IProjectItemHandle newValue)
+		private void Select(IProjectItemViewModel newValue)
 		{
+			if (_treeView == null)
+				return;
+
 			var treeViewItem = _treeView.ItemContainerGenerator.ContainerFromItem(newValue) as TreeViewItem;
 			if (treeViewItem != null)
 			{
@@ -44,26 +45,26 @@ namespace Serenity.Ui.ProjectExplorer
 			                                         new FrameworkPropertyMetadata(typeof (ProjectExplorerControl)));
 		}
 
-		public IProjectItemHandle SelectedItem
+		public IProjectItemViewModel SelectedItem
 		{
-			get { return (IProjectItemHandle)GetValue(SelectedItemProperty); }
+			get { return (IProjectItemViewModel)GetValue(SelectedItemProperty); }
 			set { SetValue(SelectedItemProperty, value); }
 		}
 
-		public ProjectHandle Project
+		public ProjectViewModel Project
 		{
-			get { return (ProjectHandle)GetValue(ProjectProperty); }
+			get { return (ProjectViewModel)GetValue(ProjectProperty); }
 			set { SetValue(ProjectProperty, value); }
 		}
 
 		private static void OnProjectChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
 		{
-			((ProjectExplorerControl)d).OnProjectChanged((ProjectHandle)e.NewValue);
+			((ProjectExplorerControl)d).OnProjectChanged((ProjectViewModel)e.NewValue);
 		}
 
-		private void OnProjectChanged(ProjectHandle project)
+		private void OnProjectChanged(ProjectViewModel project)
 		{
-			_items = new[] {ProjectExplorerFactory.Create(project)};
+			_items = new IProjectItemViewModel[] {project};
 			if (_treeView != null)
 			{
 				_treeView.ItemsSource = _items;
@@ -83,7 +84,6 @@ namespace Serenity.Ui.ProjectExplorer
 			if (_treeView != null)
 			{
 				_treeView.ItemsSource = _items;
-				SelectedItem = GetItem(_treeView.SelectedItem as IProjectItemViewModel);
 				_treeView.SelectedItemChanged += TreeViewOnSelectedItemChanged;
 
 				Select(SelectedItem);
@@ -92,15 +92,8 @@ namespace Serenity.Ui.ProjectExplorer
 
 		private void TreeViewOnSelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> args)
 		{
-			SelectedItem = GetItem(args.NewValue as IProjectItemViewModel);
+			SelectedItem = args.NewValue as IProjectItemViewModel;
 		}
 
-		private static IProjectItemHandle GetItem(IProjectItemViewModel viewModel)
-		{
-			if (viewModel == null)
-				return null;
-
-			return viewModel.Item;
-		}
 	}
 }

@@ -18,10 +18,7 @@ namespace Serenity
 			using (var eventTracingEngine = new EventTracingEngine())
 			{
 				var viewModel = new MainWindowViewModel();
-				var window = new MainWindow
-					{
-						DataContext = viewModel
-					};
+				var window = new MainWindow(viewModel);
 				window.Show();
 				return application.Run();
 			}

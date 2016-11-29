@@ -25,7 +25,7 @@
 
             <TextBlock Grid.Column="1"
                        VerticalAlignment="Center"
-                       Text="{Binding Name}" />
+                       Text="{Binding DisplayName}" />
         </Grid>
     </HierarchicalDataTemplate>
 

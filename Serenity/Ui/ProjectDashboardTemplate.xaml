@@ -11,15 +11,15 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
-            <projectExplorer:ProjectExplorerControl Project="{Binding CurrentProject}"
-                                                SelectedItem="{Binding SelectedItem}" />
+            <projectExplorer:ProjectExplorerControl Project="{Binding ProjectViewModel}"
+                                                SelectedItem="{Binding SelectedItemViewModel}" />
 
             <Grid Grid.Column="1"
               Width="1"
               Background="{StaticResource SeparatorBrush}" />
 
             <pages:PageControl Grid.Column="2"
-                           Page="{Binding SelectedItem}" />
+                           Page="{Binding SelectItemPageViewModel}" />
 
         </Grid>
     </DataTemplate>

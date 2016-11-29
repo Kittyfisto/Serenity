@@ -1,41 +1,25 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using Serenity.BusinessLogic;
-using Serenity.BusinessLogic.Handles;
+﻿using Serenity.BusinessLogic.Handles;
 
 namespace Serenity.Ui.ProjectExplorer
 {
 	public sealed class EventTracingSessionViewModel
-		: IProjectItemViewModel
+		: AbstractProjectItemViewModel
 	{
-		private readonly EventTracingSessionHandle _session;
-		private readonly ObservableCollection<EventTraceViewModel> _traces;
+		private readonly EventTracingSessionHandle _eventTrace;
 
-		public EventTracingSessionViewModel(EventTracingSessionHandle session)
+		public EventTracingSessionViewModel(EventTracingSessionHandle eventTrace)
+			: base(eventTrace)
 		{
-			_session = session;
-			_traces = new ObservableCollection<EventTraceViewModel>(session.EventTraces.Select(CreateViewModel));
-		}
-
-		private EventTraceViewModel CreateViewModel(EventTraceHandle eventTrace)
-		{
-			return new EventTraceViewModel(eventTrace);
-		}
-
-		public IEnumerable<EventTraceViewModel> Traces
-		{
-			get { return _traces; }
+			_eventTrace = eventTrace;
 		}
 
 		public string Name
 		{
-			get { return _session.Name; }
+			get { return _eventTrace.Name; }
 		}
 
-		public IProjectItemHandle Item
+		public override void Update()
 		{
-			get { return _session; }
 		}
 	}
 }

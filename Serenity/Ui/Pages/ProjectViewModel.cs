@@ -27,6 +27,7 @@ namespace Serenity.Ui.Pages
 
 		private void CreateEtwSession()
 		{
+			_project.Add(new EventTraceHandle{Name = "New event trace"});
 		}
 	}
 }

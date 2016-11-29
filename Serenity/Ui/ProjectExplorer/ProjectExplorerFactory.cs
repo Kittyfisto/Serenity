@@ -1,5 +1,4 @@
 ﻿using System.Reflection;
-using Serenity.BusinessLogic;
 using Serenity.BusinessLogic.Handles;
 using log4net;
 
@@ -25,13 +24,13 @@ namespace Serenity.Ui.ProjectExplorer
 			if (folder != null)
 				return new FolderViewModel(folder);
 
-			var etw = item as EventTracingSessionHandle;
-			if (etw != null)
-				return new EventTracingSessionViewModel(etw);
-
 			var trace = item as EventTraceHandle;
 			if (trace != null)
 				return new EventTraceViewModel(trace);
+
+			var etw = item as EventTracingSessionHandle;
+			if (etw != null)
+				return new EventTracingSessionViewModel(etw);
 
 			Log.ErrorFormat("Did not find a view model for '{0}' of type {1}", item, item.GetType());
 

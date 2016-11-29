@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using Serenity.BusinessLogic;
 using Serenity.BusinessLogic.Handles;
 
 namespace Serenity.Ui.ProjectExplorer
 {
 	public sealed class FolderViewModel
-		: IProjectItemViewModel
+		: AbstractProjectItemViewModel
 	{
 		private readonly ProjectFolderHandle _folder;
 		private readonly ObservableCollection<IProjectItemViewModel> _items;
 
 		public FolderViewModel(ProjectFolderHandle folder)
+			: base(folder)
 		{
 			if (folder == null)
 				throw new ArgumentNullException("folder");
@@ -26,14 +26,9 @@ namespace Serenity.Ui.ProjectExplorer
 			get { return _items; }
 		}
 
-		public string Name
+		public override void Update()
 		{
-			get { return _folder.Name; }
-		}
-
-		public IProjectItemHandle Item
-		{
-			get { return _folder; }
+			Synchronize(_items, _folder.Files);
 		}
 	}
 }

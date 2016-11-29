@@ -14,9 +14,9 @@ namespace Serenity.Ui.Pages
 			if (project != null)
 				return new ProjectViewModel(project);
 
-			var etw = item as EventTracingSessionHandle;
+			var etw = item as EventTraceHandle;
 			if (etw != null)
-				return new EventTracingSessionViewModel(etw);
+				return new EventTraceViewModel(etw);
 
 			return null;
 		}

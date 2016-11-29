@@ -5,8 +5,15 @@
     <HierarchicalDataTemplate DataType="{x:Type projectExplorer:FolderViewModel}"
                               ItemsSource="{Binding Items}">
         <Grid>
-            <TextBlock Text="{Binding Name}" />
+            <TextBlock Text="{Binding DisplayName}" />
         </Grid>
     </HierarchicalDataTemplate>
-    
+
+    <HierarchicalDataTemplate DataType="{x:Type projectExplorer:FakeFolderViewModel}"
+                              ItemsSource="{Binding Items}">
+        <Grid>
+            <TextBlock Text="{Binding DisplayName}" />
+        </Grid>
+    </HierarchicalDataTemplate>
+
 </ResourceDictionary>

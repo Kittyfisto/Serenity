@@ -2,22 +2,21 @@
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using Metrolib;
-using Serenity.BusinessLogic;
 using Serenity.BusinessLogic.Handles;
 
 namespace Serenity.Ui.Pages
 {
-	public sealed class EventTracingSessionViewModel
+	public sealed class EventTraceViewModel
 		: IPageViewModel
 		, INotifyPropertyChanged
 	{
-		private readonly EventTracingSessionHandle _session;
+		private readonly EventTraceHandle _file;
 		private readonly DelegateCommand _toggleRecordCommand;
 		private bool _isRecording;
 
-		public EventTracingSessionViewModel(EventTracingSessionHandle session)
+		public EventTraceViewModel(EventTraceHandle file)
 		{
-			_session = session;
+			_file = file;
 			_toggleRecordCommand = new DelegateCommand(ToggleRecord);
 		}
 
@@ -35,7 +34,7 @@ namespace Serenity.Ui.Pages
 					return;
 
 				_isRecording = value;
-				_session.IsRecording = value;
+				_file.IsRecording = value;
 				EmitPropertyChanged();
 			}
 		}

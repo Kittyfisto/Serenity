@@ -1,26 +1,44 @@
-﻿using Serenity.BusinessLogic;
+﻿using System.Collections.Generic;
 using Serenity.BusinessLogic.Handles;
 
 namespace Serenity.Ui.ProjectExplorer
 {
 	public sealed class EventTraceViewModel
-		: IProjectItemViewModel
+		: AbstractProjectItemViewModel
 	{
-		private readonly EventTraceHandle _eventTrace;
+		private readonly EventTraceHandle _trace;
+		private readonly FakeFolderViewModel[] _folders;
+		private readonly FakeFolderViewModel _sessions;
+		private readonly FakeFolderViewModel _providers;
 
-		public EventTraceViewModel(EventTraceHandle eventTrace)
+		public EventTraceViewModel(EventTraceHandle trace)
+			: base(trace)
 		{
-			_eventTrace = eventTrace;
+			_trace = trace;
+			_sessions = new FakeFolderViewModel("Sessions", trace.Sessions);
+			_providers = new FakeFolderViewModel("Providers", trace.Providers);
+
+			_folders = new[]
+				{
+					_sessions,
+					_providers
+				};
+		}
+
+		public IEnumerable<FakeFolderViewModel> Items
+		{
+			get { return _folders; }
 		}
 
 		public string Name
 		{
-			get { return _eventTrace.Name; }
+			get { return _trace.Name; }
 		}
 
-		public IProjectItemHandle Item
+		public override void Update()
 		{
-			get { return _eventTrace; }
+			_sessions.Update();
+			_providers.Update();
 		}
 	}
 }

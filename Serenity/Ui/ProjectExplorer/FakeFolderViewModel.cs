@@ -5,19 +5,19 @@ using Serenity.BusinessLogic.Handles;
 
 namespace Serenity.Ui.ProjectExplorer
 {
-	public sealed class ProjectViewModel
+	public sealed class FakeFolderViewModel
 		: AbstractProjectItemViewModel
 	{
+		private readonly IEnumerable<IProjectItemHandle> _handles;
 		private readonly ObservableCollection<IProjectItemViewModel> _items;
-		private readonly ProjectHandle _project;
 
-		public ProjectViewModel(ProjectHandle project)
-			: base(project)
+		public FakeFolderViewModel(string name, IEnumerable<IProjectItemHandle> handles)
+			: base(name)
 		{
-			if (project == null)
-				throw new ArgumentNullException("project");
+			if (handles == null)
+				throw new ArgumentNullException("handles");
 
-			_project = project;
+			_handles = handles;
 			_items = new ObservableCollection<IProjectItemViewModel>();
 			Update();
 		}
@@ -29,7 +29,7 @@ namespace Serenity.Ui.ProjectExplorer
 
 		public override void Update()
 		{
-			Synchronize(_items, _project.Items);
+			Synchronize(_items, _handles);
 		}
 	}
 }

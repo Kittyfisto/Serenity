@@ -8,14 +8,14 @@ namespace Serenity
 	public sealed class MainWindowViewModel
 		: INotifyPropertyChanged
 	{
-		private object _content;
+		private IViewModel _content;
 
 		public MainWindowViewModel()
 		{
 			_content = new DashboardViewModel(this);
 		}
 
-		public object Content
+		public IViewModel Content
 		{
 			get { return _content; }
 			private set
@@ -40,6 +40,12 @@ namespace Serenity
 		{
 			var project = new ProjectHandle("New Project");
 			Content = new ProjectDashboardViewModel(project);
+		}
+
+		public void Update()
+		{
+			if (Content != null)
+				Content.Update();
 		}
 	}
 }

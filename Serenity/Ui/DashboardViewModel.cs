@@ -4,6 +4,7 @@ using Metrolib;
 namespace Serenity.Ui
 {
 	public sealed class DashboardViewModel
+		: IViewModel
 	{
 		private readonly MainWindowViewModel _viewModel;
 		private readonly ICommand _createProjectCommand;
@@ -16,6 +17,11 @@ namespace Serenity.Ui
 		public ICommand CreateProjectCommand
 		{
 			get { return _createProjectCommand; }
+		}
+
+		public void Update()
+		{
+			
 		}
 	}
 }

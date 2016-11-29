@@ -1,32 +1,27 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 
 namespace Serenity.BusinessLogic.Handles
 {
 	/// <summary>
-	///     Represents an event tracing session that may consume events live and / or record events onto the disk.
+	///     Represents an event tracing file that may consume events live and / or record events onto the disk.
 	/// </summary>
 	public sealed class EventTracingSessionHandle
 		: IProjectItemHandle
 	{
-		private readonly List<EventTraceHandle> _eventTraces;
+		private string _fileName;
 
-		public EventTracingSessionHandle()
+		public EventTracingSessionHandle(string fileName)
 		{
-			_eventTraces = new List<EventTraceHandle>();
+			_fileName = fileName;
+			Name = Path.GetFileName(_fileName);
 		}
-
-		public IEnumerable<EventTraceHandle> EventTraces
-		{
-			get { return _eventTraces; }
-		}
-
-		public bool IsRecording { get; set; }
 
 		public string Name { get; set; }
 
-		public void Add(EventTraceHandle eventTrace)
+		public string FileName
 		{
-			_eventTraces.Add(eventTrace);
+			get { return _fileName; }
 		}
 	}
 }

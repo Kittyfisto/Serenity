@@ -4,7 +4,7 @@
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="ProjectPage.xaml" />
-        <ResourceDictionary Source="EventTracingSessionPage.xaml" />
+        <ResourceDictionary Source="EventTracePage.xaml" />
     </ResourceDictionary.MergedDictionaries>
     
     <Style TargetType="{x:Type local:PageControl}">

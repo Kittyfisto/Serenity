@@ -2,25 +2,29 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:projectExplorer="clr-namespace:Serenity.Ui.ProjectExplorer">
 
-    <PathGeometry x:Key="ChartTimeline">M2,2H4V20H22V22H2V2M7,10H17V13H7V10M11,15H21V18H11V15M6,4H22V8H20V6H8V8H6V4Z</PathGeometry>
-    
-    <HierarchicalDataTemplate DataType="{x:Type projectExplorer:EventTracingSessionViewModel}"
-                              ItemsSource="{Binding Traces}">
+    <PathGeometry x:Key="Database">
+        M12,3C7.58,3 4,4.79 4,7C4,9.21 7.58,11 12,11C16.42,11 20,9.21 20,7C20,4.79 16.42,3 12,3M4,9V12C4,14.21 7.58,16 12,16C16.42,16 20,14.21 20,12V9C20,11.21 16.42,13 12,13C7.58,13 4,11.21 4,9M4,14V17C4,19.21 7.58,21 12,21C16.42,21 20,19.21 20,17V14C20,16.21 16.42,18 12,18C7.58,18 4,16.21 4,14Z
+    </PathGeometry>
+
+    <DataTemplate DataType="{x:Type projectExplorer:EventTracingSessionViewModel}">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
+
             <Viewbox Width="24" Height="24"
                      Margin="0,0,6,0">
                 <Canvas Width="24" Height="24">
-                    <Path Data="{StaticResource ChartTimeline}" Fill="Black" />
+                    <Path Data="{StaticResource Database}" Fill="Black" />
                 </Canvas>
             </Viewbox>
+
             <TextBlock Grid.Column="1"
                        VerticalAlignment="Center"
                        Text="{Binding Name}" />
+
         </Grid>
-    </HierarchicalDataTemplate>
-    
+    </DataTemplate>
+
 </ResourceDictionary>
